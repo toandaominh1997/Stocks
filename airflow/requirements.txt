@@ -1,0 +1,10 @@
+apache-airflow-providers-papermill
+numpy
+pandas
+scikit-learn
+category-encoders
+pyod
+imblearn
+lightgbm
+xgboost
+catboost
