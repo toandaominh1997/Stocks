@@ -10,19 +10,16 @@ RUN apt-get update && \
         apt-get install -y pkg-config libhdf5-dev \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
-RUN useradd -m tonne && echo "tonne:tonne" | chpasswd && adduser tonne sudo
-USER tonne
-WORKDIR /code
+
+USER airflow
 RUN python --version
 RUN pip --version
 RUN pip install --upgrade pip
-RUN pip install jupyterlab
-#RUN pip install --upgrade ipython ipykernel
-#RUN ipython kernel install --name "python"
-COPY requirements.txt /code
-RUN cd /code && pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade ipython ipykernel
+RUN ipython kernel install --name "python3" --user
+COPY requirements.txt /opt
+RUN cd /opt && pip install --no-cache-dir --user -r requirements.txt
 RUN pip install git+https://github.com/phamdinhkhanh/vnquant.git@master
 
 RUN pip install seaborn matplotlib plotly tqdm
-RUN pip install Unidecode
 

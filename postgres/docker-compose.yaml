@@ -4,12 +4,18 @@ services:
   postgres:
     image: postgres:latest
     ports:
-      - 127.0.0.1:5433:5432
+      - 5433:5432
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=pass
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - tonne_network
 volumes:
   pgdata:
+networks:
+  tonne_network:
+    driver: bridge
+    external: true

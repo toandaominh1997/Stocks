@@ -20,14 +20,14 @@ with DAG(
     factory_task = BashOperator(task_id='print_hello', bash_command='echo "hello world!!!"')
     nb_task = PapermillOperator(
         task_id="training_TS",
-        input_nb="/code/Stocks/modeling/TS.ipynb",
-        output_nb="/home/airflow/Stocks/TS-{{ execution_date }}.ipynb",
+        input_nb="/home/airflow/code/Stocks/modeling/TS.ipynb",
+        output_nb="/home/airflow/code/Stocks/modeling/TS-{{ execution_date }}.ipynb",
         parameters={"msgs": "Ran from Airflow at {{ execution_date }}!"}
     )
     nb_test_task = PapermillOperator(
         task_id="testing",
-        input_nb="/code/Stocks/modeling/TEST.ipynb",
-        output_nb="/home/airflow/test-{{ execution_date }}.ipynb",
+        input_nb="/opt/code/modeling/TEST.ipynb",
+        output_nb="/opt/code/modeling/test-{{ execution_date }}.ipynb",
         parameters={"msgs": "Ran from Airflow at {{ execution_date }}!"}
     )
     ensemble_task = BashOperator(task_id='ensemble', bash_command='echo "Ensemble Task!!!"')
